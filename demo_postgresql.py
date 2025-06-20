@@ -26,6 +26,23 @@ class Students(db.Model):
 def index():
     db.create_all()
     return "資料庫連線成功"
+
+@app.route("/insert")
+def insert():
+    student = Students("炭治郎","0911111111","台北市信義路101號","tji@gamil.com")
+    db.session.add(student)
+    db.session.commit()
+    return "新增一筆紀錄成功"
+
+@app.route("/insertAll")
+def insertAll():
+    student1 = Students("彌豆子","0922222222","台北市信義路101號","mdj@gamil.com")
+    student2 = Students("伊之助","0933333333","台北市信義路101號","yjj@gamil.com")
+    student=(student1,student2)
+    db.session.add_all(student)
+    db.session.commit()
+    return "新增多筆紀錄成功"
+
 if __name__ == "__main__":
     app.run()
 
